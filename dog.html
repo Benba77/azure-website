@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doggie </title>
-    <link rel="stylesheet" href="css.css">
+    <link rel="stylesheet" href="dog.css">
 </head>
 <body>
     <h1> Köpek </h1>
@@ -13,11 +13,20 @@
     <p id="rassenContainer" style="text-transform: capitalize;">  </p>
     <a href="https://www.beispiel.com">   </a>
 
+    <button 
+    id="farbenButton"
+    style="
+        margin: 500;
+        padding:10%"
+    > Change Background  </button> </br> </br>
+    
+    <button id="hintergrund"> Button Farbe ändern </button>
+
     <script>
         var button = document.getElementById("randomHund") //button definieren & id anpeilen
-button.addEventListener("click", function(){ //click funktion einbauen mit eventlistener
+    button.addEventListener("click", function(){ //click funktion einbauen mit eventlistener
     getDog() //Funktion die ausgeführt wird bei click
-});
+    });
 
 async function getDog (){ //Funktion definieren
  var header = await fetch('https://dog.ceo/api/breeds/image/random')  //await nur bei Anfr
@@ -35,6 +44,26 @@ async function getDog (){ //Funktion definieren
 
  rassenContainer.innerText = `Rasse: ${rassenName}`; //steuert Text von der id an & schreibt dort f String
 }
+
+//Hintergrund Farbe der HTML Seite ändern
+document.getElementById("farbenButton").addEventListener('click', function(){
+    var colors = ['#ff5733', '#33c5ff', '#33ff57', '#f3ff33', '#ff33f3'];
+    //Erzeugt eine zufällige Zahl zwischen 0 und der Länge des Farbarrays und wählt dann die Farbe an dieser Position aus dem Array aus.
+    var randomColor = colors[Math.floor(Math.random() * colors.length)]; 
+    document.body.style.backgroundColor = randomColor;
+})
+
+//Button Farbe ändern
+var button_2 = document.getElementById("hintergrund") //
+var isRed= true
+button_2.addEventListener('click', function(){
+    if (isRed) {
+        button.style.backgroundColor = "#33c5ff";
+    } else {
+        button.style.backgroundColor = "#ff5733";
+    }
+    isRed = !isRed;
+});
 
 console.log("Funzt es?")
     </script>
