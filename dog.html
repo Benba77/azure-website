@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doggie </title>
+    <link rel="stylesheet" href="css.css">
+</head>
+<body>
+    <h1> Köpek </h1>
+    <button id="randomHund" style="margin: 30;"> Random </button> <br> <br>
+    <img id="hundFoto" src="https://i0.wp.com/www.flylanddesigns.com/wp-content/uploads/Big-Dawg-Logo_Design.jpg?resize=900%2C900&ssl=1"  alt="Hunde Foto" style="height: 300px; width: 300px;"> 
+    <p id="rassenContainer" style="text-transform: capitalize;">  </p>
+    <a href="https://www.beispiel.com">   </a>
+
+    <script>
+        var button = document.getElementById("randomHund") //button definieren & id anpeilen
+button.addEventListener("click", function(){ //click funktion einbauen mit eventlistener
+    getDog() //Funktion die ausgeführt wird bei click
+});
+
+async function getDog (){ //Funktion definieren
+ var header = await fetch('https://dog.ceo/api/breeds/image/random')  //await nur bei Anfr
+ console.log(header)
+
+ var payload = await header.json()
+ console.log(payload)
+
+ var bildUrl = payload["message"] // oder .message
+ console.log(bildUrl)
+ document.getElementById('hundFoto').src = bildUrl //Steuert Id von img und ersetzt dort src mit bildUrl
+
+ var rassenContainer = document.getElementById("rassenContainer") 
+ var rassenName = bildUrl.split("/")[4].replace("-"," ")
+
+ rassenContainer.innerText = `Rasse: ${rassenName}`; //steuert Text von der id an & schreibt dort f String
+}
+
+console.log("Funzt es?")
+    </script>
+</body>
+</html>
